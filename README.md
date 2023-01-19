@@ -1,11 +1,11 @@
-# Typescript parceljs html page template
-* parceljs
-* typescript  
-* linter - eslint with @typescript-eslint
-* prettier
-* pre-commit hook for lint
-* reading .env files
-* simple HMR using `window.location.reload()`
+# Text editing
+* markdown-it
+* katex 
+* mermaid
+* highlight-js  
+
+TODO:
+* prosemirror 
 
 ### Development
 ```npm run dev```
@@ -15,3 +15,9 @@ starts server hosted on port
 
 ### Production
 ``npm run prod``
+
+### mermaid workaround
+edit dist  
+exports  
+module  
+replace with exports$1, module$1
