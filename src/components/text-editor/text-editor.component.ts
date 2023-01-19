@@ -30,6 +30,10 @@ export class TextEditorComponent implements IComponent<HTMLElement> {
       dispatchTransaction: (tx) => {
         state = state.apply(tx);
         this.view?.updateState(state);
+        if (tx.docChanged) {
+          /* eslint-disable */
+          console.log(state.toJSON());
+        }
       }
     });
   }
