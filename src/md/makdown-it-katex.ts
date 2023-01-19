@@ -186,6 +186,7 @@ export function markdownItKatexPlugin(md: MarkdownIt) {
       if (options.throwOnError) {
         /* eslint-disable no-console */
         console.error(error);
+        /* eslint-enable no-console */
       }
       return latex;
     }
@@ -203,6 +204,7 @@ export function markdownItKatexPlugin(md: MarkdownIt) {
       if (options.throwOnError) {
         /* eslint-disable no-console */
         console.error(error);
+        /* eslint-enable no-console */
       }
       return latex;
     }

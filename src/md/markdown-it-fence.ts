@@ -4,20 +4,21 @@ import * as StateBlock from 'markdown-it/lib/rules_block/state_block';
 import * as Token from 'markdown-it/lib/token';
 import MarkdownIt, { Options } from 'markdown-it';
 
-interface MarkdownItFenceOptions {
-  validate(params: string): boolean;
-  render: () => string;
-  marker: string;
+export interface MarkdownItFenceOptions {
+  validate?: (params: string) => string;
+  render?: (tokens: Token[], idx: number) => string;
+  marker?: string;
 }
 
-export const markdownItFence = (md: MarkdownIt, name: string, options: MarkdownItFenceOptions) => {
-  const defaultValidate = (params: string): boolean => {
-    return params.trim().split(' ', 2)[0] === name;
+export const markdownItFence = (md: MarkdownIt, names: string[], options: MarkdownItFenceOptions) => {
+  const defaultValidate = (params: string): string => {
+    const name = params.trim().split(' ', 2)[0];
+    return names.includes(name) ? name : '';
   };
 
   const defaultRender = (tokens: Token[], idx: number, opt: Options, env: MarkdownIt.Environment, self: Renderer) => {
     if (tokens[idx].nesting === 1) {
-      tokens[idx].attrPush(['class', name]);
+      tokens[idx].attrPush(['class', tokens[idx].type]);
     }
 
     return self.renderToken(tokens, idx, opt);
@@ -84,7 +85,9 @@ export const markdownItFence = (md: MarkdownIt, name: string, options: MarkdownI
     len = state.sCount[startLine];
     state.line = nextLine + (haveEndMarker ? 1 : 0);
 
-    if (!options.validate(params)) return false;
+    if (!options.validate) return false;
+    const name = options.validate(params);
+    if (!name) return false;
     const token = state.push(name, 'div', 0);
     token.info = params;
     token.content = state.getLines(startLine + 1, nextLine, len, true);
@@ -93,10 +96,13 @@ export const markdownItFence = (md: MarkdownIt, name: string, options: MarkdownI
 
     return true;
   };
-  /* eslint-disable */
-  md.block.ruler.before('fence', name, fence, {
-    alt: ['paragraph', 'reference', 'blockquote', 'list']
-  });
-  /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-  md.renderer.rules[name] = options.render;
+  for (const name of names) {
+    /* eslint-disable */
+    md.block.ruler.before('fence', name, fence, {
+      alt: ['paragraph', 'reference', 'blockquote', 'list']
+    });
+    /* eslint-enable */
+    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    md.renderer.rules[name] = options.render;
+  }
 };
