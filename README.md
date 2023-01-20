@@ -17,7 +17,6 @@ starts server hosted on port
 ``npm run prod``
 
 ### mermaid workaround
-edit dist  
-exports  
-module  
-replace with exports$1, module$1
+TODO: use as submodule
+build mermaid from repository ```https://github.com/vane/mermaid``` branch ```parcel-build```  
+copy ```cp -r dist rtt-markdown/mermaid/```

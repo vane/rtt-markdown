@@ -3,6 +3,7 @@ import { MarkdownItFenceOptions, markdownItFence } from './markdown-it-fence';
 import MarkdownIt from 'markdown-it';
 import mermaid from 'mermaid';
 import { nanoid } from 'nanoid';
+/* eslint-disable */
 mermaid.initialize({ theme: 'forest', startOnLoad: false });
 
 const renderer = (tokens: Token[], idx: number) => {
