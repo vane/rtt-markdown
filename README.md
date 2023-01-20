@@ -7,6 +7,8 @@
 TODO:
 * prosemirror 
 
+![screenshot](doc/screenshot.png)
+
 ### Development
 ```npm run dev```
 
