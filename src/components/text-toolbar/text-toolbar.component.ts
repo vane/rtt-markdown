@@ -8,6 +8,10 @@ const elStyles = {
   height: '24px'
 };
 
+export interface TextToolbarOptions {
+  header: string;
+}
+
 export class TextToolbarComponent implements IComponent<HTMLElement> {
   private readonly el = document.createElement('div');
 
@@ -15,6 +19,12 @@ export class TextToolbarComponent implements IComponent<HTMLElement> {
 
   constructor() {
     this.headerButton = new TextHeaderButton();
+  }
+
+  options(): TextToolbarOptions {
+    return {
+      header: this.headerButton.value()
+    };
   }
 
   render() {

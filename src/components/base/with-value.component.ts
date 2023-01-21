@@ -3,7 +3,11 @@ import { IComponent } from './icomponent';
 
 const elStyles = {
   'user-select': 'none',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  margin: '0',
+  padding: '0',
+  'padding-top': '10px',
+  'padding-bottom': '10px'
 };
 
 export class WithValueComponent<T> implements IComponent<HTMLElement> {
