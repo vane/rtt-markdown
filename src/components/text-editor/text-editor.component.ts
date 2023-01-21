@@ -1,12 +1,12 @@
-import { CssStyleFactory } from '../../utils/css-style.factory';
+import { CssFactory } from '../../utils/css.factory';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { IComponent } from '../icomponent';
+import { IComponent } from '../base/icomponent';
 import { TextEditorFactory } from './text-editor.factory';
 
 const elStyles = {
   border: '1px solid #000000',
-  width: '200px',
+  width: '100%',
   height: '200px'
 };
 
@@ -43,7 +43,7 @@ export class TextEditorComponent implements IComponent<HTMLElement> {
   }
 
   render(): HTMLElement {
-    CssStyleFactory.apply(this.el, elStyles);
+    CssFactory.apply(this.el, elStyles);
     return this.el;
   }
 }

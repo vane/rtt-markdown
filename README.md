@@ -1,4 +1,4 @@
-# Text editing
+# Text editor
 * markdown-it
 * katex 
 * mermaid

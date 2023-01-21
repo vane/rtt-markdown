@@ -1,6 +1,7 @@
 .ProseMirror {
+    width: 100%;
     min-height: 0;
-    height: fit-content;
+    height: 100%;
     outline: none;
     overflow: auto;
     border: none;

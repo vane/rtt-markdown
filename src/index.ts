@@ -1,13 +1,11 @@
 import './css/prosemirror.css';
 import 'highlight.js/styles/github.css';
 import { Config } from './config';
-import { TextEditorComponent } from './components/text-editor/text-editor.component';
+import { TextContainerComponent } from './components/text-container.component';
 import { markdownItHightlight } from './md/markdown-it-highlightjs';
 import { markdownItKatexPlugin } from './md/makdown-it-katex';
 import { markdownItMermaid } from './md/markdown-it-mermaid';
 import markdownit from 'markdown-it';
-const el = document.createElement('div');
-document.body.appendChild(el);
 
 const mdText = `### table with katex equation
 equation | description
@@ -36,13 +34,23 @@ B --> C{Decision}
 C -->|One| D[Result 1]
 C -->|Two| E[Result 2]
 \`\`\`
+__bold__  
+*italic*  
+~~Strikethrough~~  
+
+> text quote  
+
+
+# h1
+## h2
+### h3
+#### h4
+##### h5
+###### h6
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
 
 `;
-
-/* eslint-disable */
-const md = markdownit({ html: false }).use(markdownItKatexPlugin).use(markdownItMermaid).use(markdownItHightlight)
-// console.log(md.parse(mdText));
-el.innerHTML = md.render(mdText);
 
 // Hot reloading
 if (!Config.isProduction) {
@@ -51,6 +59,13 @@ if (!Config.isProduction) {
     window.location.reload();
   };
 }
-const editor = new TextEditorComponent('');
-document.body.appendChild(editor.render());
-editor.focus();
+const textContainer = new TextContainerComponent();
+document.body.appendChild(textContainer.render());
+textContainer.focus();
+
+/* eslint-disable */
+const md = markdownit({ html: false }).use(markdownItKatexPlugin).use(markdownItMermaid).use(markdownItHightlight)
+// console.log(md.parse(mdText));
+const el = document.createElement('div');
+document.body.appendChild(el);
+el.innerHTML = md.render(mdText);
